@@ -28,17 +28,15 @@ function Send-MatrixMessage {
     )
 
     $random = Get-Random
-    # change trygve.me with your own homeserver. You might need a port.
     $endpoint = "https://$HomeServer/_matrix/client/v3/rooms/$Room/send/m.room.message/$random"
     $hash=@{
         msgtype="m.text"
         body=$Message
     }
     $json = $hash | ConvertTo-Json
-    # Put Access Token after "Bearer".
     $headers = @{"Authorization" = "Bearer $Token"}
 
-    # Write everything to the console.
+    # Say that the message is being sent.
     Write-Host -ForegroundColor Blue "Sending $Message to $Room on $HomeServer."
     try {
         $response = Invoke-WebRequest -Uri $endpoint -Method PUT -Body $json -Headers $headers -ContentType "application/json"
