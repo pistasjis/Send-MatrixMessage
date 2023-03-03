@@ -27,8 +27,7 @@ function Send-MatrixMessage {
         [string]$Token
     )
 
-    $random = Get-Random
-    $endpoint = "https://$HomeServer/_matrix/client/v3/rooms/$Room/send/m.room.message/$random"
+    $endpoint = "https://$HomeServer/_matrix/client/v3/rooms/$Room/send/m.room.message"
     $hash=@{
         msgtype="m.text"
         body=$Message
